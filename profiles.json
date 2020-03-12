@@ -12,8 +12,8 @@
       "acrylicOpacity": 0.9,
       "fontFace": "Cascadia Code PL",
       "suppressApplicationTitle": true,
-      "padding": "10, 0, 0, 100",
-      "background": "#0c0c0c",
+      "padding": "10, 10, 0, 100",
+      "background": "#333333",
       "backgroundImageAlignment": "bottomRight",
       "backgroundImageStretchMode": "uniform"
     },
