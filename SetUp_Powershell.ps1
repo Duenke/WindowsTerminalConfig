@@ -90,4 +90,35 @@ function azc {
     
     Set-AzContext -SubscriptionId `$subscriptionArray[`$subscriptionInput]
 }
+
+function ResetGitBranches {
+    git checkout -q 'master' | Out-Null
+    
+    `$except = 'master', 'a_dud'
+    `$availabeBranches = git branch | foreach {`$_.Substring(2, `$_.Length - 2)} | where {`$except -notcontains `$_}
+
+    Write-Host 'Available branches on local machine: '
+    `$index = 0
+    foreach(`$branch in `$availabeBranches) {
+        Write-Host [`$index] `$branch
+        `$index += 1
+    }
+
+    Write-Host
+    Do {
+        `$saveIndex = Read-Host -Prompt 'Enter branch # to save'
+        `$saveBranch = `$availabeBranches[`$saveIndex]
+        `$except += `$saveBranch
+    } While(`$saveIndex -ne '')
+
+    `$branchesToDelete = git branch | foreach {`$_.Substring(2, `$_.Length - 2)} | where {`$except -notcontains `$_}
+
+    foreach(`$branch in `$branchesToDelete) {
+        Write-Host('Deleting branch: ' + `$branch)
+        git branch -d -f `$branch
+    }
+
+    Write-Host('Pulling branch: master')
+    git pull
+}
 "
