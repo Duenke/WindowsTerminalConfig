@@ -54,7 +54,14 @@ elseif (`$Host.Name -like '*ISE Host')
 }
 
 function azc {
-    Connect-AzAccount
+    `$AzContext = Get-AzContext;
+
+    if ( -not `$AzContext )
+    {
+        Connect-AzAccount;
+
+        `$AzContext = Get-AzContext;
+    }
 
     `$allContexts = (Get-AzContext -List | Sort-Object Account)
     `$contextArray = @()
