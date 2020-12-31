@@ -54,41 +54,26 @@ elseif (`$Host.Name -like '*ISE Host')
 }
 
 function azc {
+    Connect-AzAccount
+
     `$allContexts = (Get-AzContext -List | Sort-Object Account)
     `$contextArray = @()
-    `$contextEmailArray = @()
     `$contextCount = 0
+    `$contextInput = 0
 
-    Write-Host ''
     Foreach(`$context in `$allContexts){
-        if(!`$contextEmailArray.Contains(`$context.Account.Id)){
+        if(`$context.Name.StartsWith('MSFT')){
             `$contextArray += `$context
-            `$contextEmailArray += `$context.Account.Id
-            Write-Host ('[' + `$contextCount + '] - ' + `$context.Account)
+            Write-Host ('[' + `$contextCount + '] - ' + `$context.Name)
             `$contextCount++
         }
     }
 
-    if (!(`$contextInput = Read-Host 'Select Context')) { `$contextInput = 0 }
-    `$setContext = Set-AzContext  -Context `$contextArray[`$contextInput]
-
-    `$allSubscriptions = (Get-AzSubscription | Where-Object {`$_.State -eq 'Enabled'} | Sort-Object Name)
-    `$subscriptionArray = @()
-    `$subscriptionCount = 0
-
-    foreach(`$subscription in `$allSubscriptions){
-        `$subscriptionArray += `$subscription.Id
-        Write-Host ('[' + `$subscriptionCount + '] - ' + `$subscription.Name + ' - ' + `$subscription.Id)
-        `$subscriptionCount++
-    }
-
-    if(`$subscriptionArray.Count -gt 1) {
-        if (!(`$subscriptionInput = Read-Host 'Select Subscription')) { `$subscriptionInput = 0 }
-    } else {
-        `$subscriptionInput = 0
-    }
+    Write-Host ''
+    `$contextInput = Read-Host 'Select Context'
     
-    Set-AzContext -SubscriptionId `$subscriptionArray[`$subscriptionInput]
+    Write-Host ''
+    Set-AzContext  -Context `$contextArray[`$contextInput]
 }
 
 function ResetGitBranches {
