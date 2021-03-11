@@ -45,7 +45,7 @@ if (`$Host.Name -eq 'ConsoleHost')
 {
     Import-Module posh-git
     Import-Module oh-my-posh
-    Set-Theme Paradox
+    Set-PoshPrompt -Theme C:\GitHub\WindowsTerminalConfig\.oh-my-posh.omp.json
 }
 elseif (`$Host.Name -like '*ISE Host')
 {
