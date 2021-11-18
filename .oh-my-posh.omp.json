@@ -1,127 +1,85 @@
 {
-  "final_space": true,
-  "osc99": false,
-  "console_title": false,
-  "console_title_style": "",
-  "console_title_template": "",
+	"$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+	"final_space": true,
   "blocks": [
     {
       "type": "prompt",
-      "alignment": "left",
-      "horizontal_offset": 0,
-      "vertical_offset": 1,
+			"alignment": "right",
       "segments": [
         {
-          "type": "session",
-          "style": "plain",
-          "powerline_symbol": "",
-          "invert_powerline": false,
-          "foreground": "#E36464",
-          "foreground_templates": null,
-          "background": "",
-          "background_templates": null,
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "properties": {
-            "display_host": false,
-            "prefix": "@",
-            "user_info_separator": ""
-          }
+					"type": "path",
+					"style": "diamond",
+					"trailing_diamond": "\uE0B4",
+					"leading_diamond": "\uE0B6",
+					"foreground": "#3EC669",
+					"background": "#29315A",
+					"properties": {
+						"home_icon": "$HOME",
+						"prefix": "",
+						"postfix": "",
+						"style": "agnoster",
+						"mapped_locations": {}
+					}
         },
-        {
-          "type": "path",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "invert_powerline": false,
-          "foreground": "#100e23",
-          "foreground_templates": null,
-          "background": "#91ddff",
-          "background_templates": null,
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "properties": {}
-        },
-        {
+				{
           "type": "git",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "invert_powerline": false,
-          "foreground": "#193549",
-          "foreground_templates": null,
-          "background": "#95ffa4",
-          "background_templates": null,
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "properties": null
-        },
-        {
-          "type": "exit",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "invert_powerline": false,
-          "foreground": "#ffffff",
-          "foreground_templates": null,
-          "background": "#ff8080",
-          "background_templates": null,
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "properties": {}
-        }
-      ]
+					"style": "diamond",
+					"trailing_diamond": "\uE0B4",
+					"leading_diamond": " \uE0B6",
+					"foreground": "#43CCEA",
+					"background": "#29315A",
+					"properties": {
+						"prefix": "",
+						"postfix": "",
+						"branch_icon": "",
+						"template": "{{ .HEAD }}"
+					}
+				},
+				{
+					"type": "time",
+					"style": "diamond",
+					"trailing_diamond": "\uE0B4",
+					"leading_diamond": " \uE0B6",
+					"foreground": "#007ACC",
+					"background": "#29315A",
+					"properties": {
+						"time_format": "15:04:05"
+					}
+				}
+			]
     },
-    {
+		{
       "type": "prompt",
-      "alignment": "right",
-      "horizontal_offset": 0,
-      "vertical_offset": 0,
+			"alignment": "left",
+			"newline": true,
       "segments": [
         {
-          "type": "command",
-          "style": "plain",
-          "powerline_symbol": "",
-          "invert_powerline": false,
-          "foreground": "#ffffff",
-          "foreground_templates": null,
-          "background": "",
-          "background_templates": null,
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "properties": {
-            "command": "date +%H:%M:%S",
-            "shell": "bash"
-          }
-        }
-      ]
-    },
-    {
-      "type": "newline",
-      "alignment": "",
-      "horizontal_offset": 0,
-      "vertical_offset": 0,
-      "segments": null
-    },
-    {
-      "type": "prompt",
-      "alignment": "left",
-      "horizontal_offset": 0,
-      "vertical_offset": 0,
-      "segments": [
-        {
-          "type": "text",
-          "style": "plain",
-          "powerline_symbol": "",
-          "invert_powerline": false,
-          "foreground": "#ffffff",
-          "foreground_templates": null,
-          "background": "",
-          "background_templates": null,
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "properties": {
-            "prefix": "",
-            "text": "\u003c#C591E8\u003e❯\u003c/\u003e"
-          }
-        }
+					"type": "executiontime",
+					"style": "diamond",
+					"trailing_diamond": "\uE0B4 ",
+					"leading_diamond": "\uE0B6",
+					"foreground": "#AEA4BF",
+					"background": "#29315A",
+					"properties": {
+						"threshold": 150,
+						"style": "austin",
+						"prefix": "",
+						"postfix": ""
+					}
+				},
+				{
+					"type": "session",
+					"style": "diamond",
+					"trailing_diamond": "\uE0B4 ",
+					"leading_diamond": "\uE0B6",
+					"foreground": "#E64747",
+					"background": "#29315A",
+					"properties": {
+						"display_host": false,
+						"postfix": " \u276F",
+						"prefix": ""
+					}
+				}
       ]
     }
   ]

@@ -1,8 +1,8 @@
 # WindowsTerminalConfig
 My personal Windows Terminal Configuration.
 
-[Download Cascadia Code PL font here](https://github.com/microsoft/cascadia-code/releases)
+[Download CaskaydiaCove Nerd Font here](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip)
 
-Run **Setup_Powershell.ps1** via *Powershell* or *Powershell Core* in Terminal.
+Run **Setup-Powershell.ps1** via *Powershell* or *Powershell Core* in Terminal.
 
-Copy **profiles.json** into your ***Terminal's*** *profiles.json*.
+Copy **WindowsTerminalSettings.json** into your ***WindowsTerminal's*** *settings.json*.
