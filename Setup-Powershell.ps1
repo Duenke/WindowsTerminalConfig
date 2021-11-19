@@ -80,24 +80,36 @@ function Dinks-AzContext {
 }
 
 function Dinks-GitPrune {
-    git checkout -q 'develop' | Out-Null;
+		try {
+			git checkout -q 'develop' | Out-Null;
+		}
+		catch {
+			Write-Host -ForegroundColor Red 'This directory is not a git repository!';
+			return;
+		}
     
     `$except = 'master', 'develop', 'a_dud';
     `$availabeBranches = git branch | ForEach-Object { `$_.Substring(2, `$_.Length - 2) } | Where-Object { `$except -notcontains `$_ };
 
     Write-Host -ForegroundColor Magenta 'Available branches on local machine: ';
-    `$index = 0;
+    `$index = -1;
     foreach(`$branch in `$availabeBranches) {
-        Write-Host -ForegroundColor Gray [`$index] `$branch;
-        `$index += 1;
+				`$index += 1;
+        Write-Host -ForegroundColor Yellow [`$index] `$branch;
     }
 
     Write-Host;
     Do {
         `$saveIndex = Read-Host -Prompt 'Enter branch # to save';
-        `$saveBranch = `$availabeBranches[`$saveIndex];
-        `$except += `$saveBranch;
-    } While(`$saveIndex -ne '')
+
+				if(`$saveIndex -eq '') {
+					break;
+				}
+				else {
+					`$saveBranch = `$availabeBranches[`$saveIndex];
+					`$except += `$saveBranch;
+				}
+    } While(`$true)
 
     `$branchesToDelete = git branch | ForEach-Object { `$_.Substring(2, `$_.Length - 2) } | Where-Object { `$except -notcontains `$_ };
 
