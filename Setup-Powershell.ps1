@@ -88,7 +88,7 @@ function Dinks-GitPrune {
 			return;
 		}
     
-    `$except = 'master', 'develop', 'a_dud';
+    `$except = 'master', 'main', 'develop', 'a_dud';
     `$availabeBranches = git branch | ForEach-Object { `$_.Substring(2, `$_.Length - 2) } | Where-Object { `$except -notcontains `$_ };
 
     Write-Host -ForegroundColor Magenta 'Available branches on local machine: ';
