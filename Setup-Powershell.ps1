@@ -42,8 +42,8 @@ Write-Host "creating new profile..."
 New-Item -ItemType File -Path $PROFILE.CurrentUserCurrentHost -Force
 Set-Content -Path $PROFILE.CurrentUserCurrentHost -Value "
 try {
-	Set-PoshPrompt -Theme C:\GitHub\WindowsTerminalConfig\.oh-my-posh.omp.json;
-	`$env:POSH_GIT_ENABLED = `$true;
+	# Set-PoshPrompt -Theme C:\GitHub\WindowsTerminalConfig\.oh-my-posh.omp.json;
+	# `$env:POSH_GIT_ENABLED = `$true;
 }
 catch {
 	Write-Host -ForegroundColor Magenta 'oh-my-posh has not been set up in this terminal. :)';
