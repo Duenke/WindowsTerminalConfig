@@ -95,6 +95,41 @@ function Dinks-GitPrune {
 		Write-Host -ForegroundColor Red 'This directory is not a git repository!';
 		return;
 	}
+
+	try {
+		git fetch -p | Out-Null;
+	}
+	catch {
+		Write-Host -ForegroundColor Red 'Error fetching from remote!';
+		return;
+	}
+
+	try {
+		git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | ForEach-Object -Process { 
+			if(`$_ -like '*gone]') { 
+				Write-Host -ForegroundColor DarkYellow -NoNewline Deleting branch: ;
+				Write-Host -ForegroundColor Yellow `$_.substring(11); git branch -d `$_.substring(11, `$_.length - 18) 
+			}
+		};	
+	}
+	catch {
+		Write-Host -ForegroundColor Red 'Error deleting local branches!';
+		return;
+	}
+}
+
+function Dinks-GitSelect {
+	[CmdletBinding()]
+	param (
+			
+	)
+	try {
+		git checkout -q 'develop' | Out-Null;
+	}
+	catch {
+		Write-Host -ForegroundColor Red 'This directory is not a git repository!';
+		return;
+	}
     
 	`$except = 'master', 'main', 'develop', 'a_dud';
 	`$availabeBranches = git branch | ForEach-Object { `$_.Substring(2, `$_.Length - 2) } | Where-Object { `$except -notcontains `$_ };
