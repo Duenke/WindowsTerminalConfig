@@ -86,7 +86,7 @@ function Dinks-AzContext {
 function Dinks-GitPrune {
 	[CmdletBinding()]
 	param (
-			
+		[switch]`$SafeMode
 	)
 	try {
 		git checkout -q 'develop' | Out-Null;
@@ -108,7 +108,9 @@ function Dinks-GitPrune {
 		git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | ForEach-Object -Process { 
 			if(`$_ -like '*gone]') { 
 				Write-Host -ForegroundColor DarkYellow -NoNewline Deleting branch: ;
-				Write-Host -ForegroundColor Yellow `$_.substring(11); git branch -d `$_.substring(11, `$_.length - 18) 
+				Write-Host -ForegroundColor Yellow `$_.substring(11);
+				if(`$SafeMode) { git branch -d `$_.substring(11, `$_.length - 18); }
+				else { git branch -D `$_.substring(11, `$_.length - 18); }
 			}
 		};	
 	}
@@ -118,7 +120,7 @@ function Dinks-GitPrune {
 	}
 }
 
-function Dinks-GitSelect {
+function Dinks-GitDelete {
 	[CmdletBinding()]
 	param (
 			
